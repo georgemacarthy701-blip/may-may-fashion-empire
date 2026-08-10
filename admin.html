@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CMS Admin Portal | May-May Fashion Empire</title>
+  
+  <!-- Premium Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-color: #0b0b0b;
+      --card-bg: #141414;
+      --card-border: #221f1a;
+      --gold: #d4af37;
+      --gold-hover: #f3e5ab;
+      --text-color: #e5e5e5;
+      --text-muted: #8e8e8e;
+      --error: #cf6679;
+      --success: #4caf50;
+      --input-bg: #1c1c1c;
+      --input-border: #2c2c2c;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: 'Outfit', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 15px 60px 15px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 25px;
+      width: 100%;
+      max-width: 650px;
+    }
+
+    header h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.8rem;
+      color: var(--gold);
+      letter-spacing: 2px;
+      margin-bottom: 5px;
+    }
+
+    header p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    main {
+      width: 100%;
+      max-width: 650px;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 25px 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      margin-bottom: 30px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      color: var(--text-color);
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      letter-spacing: 0.5px;
+    }
+
+    /* Touchscreen friendly inputs */
+    input[type="text"],
+    input[type="number"],
+    input[type="password"],
+    select {
+      width: 100%;
+      padding: 14px 16px;
+      background-color: var(--input-bg);
+      border: 1px solid var(--input-border);
+      border-radius: 8px;
+      color: var(--text-color);
+      font-family: 'Outfit', sans-serif;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      -webkit-appearance: none;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--gold);
+      box-shadow: 0 0 8px rgba(212, 175, 55, 0.2);
+    }
+
+    select {
+      background-image: url("data:image/svg+xml;utf8,<svg fill='%23d4af37' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      background-size: 20px;
+      padding-right: 40px;
+    }
+
+    /* Custom File Input Container */
+    .file-upload-wrapper {
+      position: relative;
+      border: 2px dashed var(--input-border);
+      border-radius: 8px;
+      padding: 25px 15px;
+      text-align: center;
+      background-color: var(--input-bg);
+      cursor: pointer;
+      transition: border-color 0.3s ease;
+    }
+
+    .file-upload-wrapper:hover,
+    .file-upload-wrapper.dragover {
+      border-color: var(--gold);
+    }
+
+    .file-upload-wrapper input[type="file"] {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .upload-icon {
+      font-size: 2rem;
+      color: var(--gold);
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .upload-text {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .upload-text strong {
+      color: var(--gold);
+    }
+
+    /* Selected files preview */
+    .preview-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .preview-item {
+      position: relative;
+      width: 70px;
+      height: 70px;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid var(--input-border);
+    }
+
+    .preview-item img,
+    .preview-item video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .preview-item .remove-btn {
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      background: rgba(0,0,0,0.7);
+      color: var(--error);
+      border: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      font-size: 11px;
+      line-height: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .video-badge {
+      position: absolute;
+      bottom: 2px;
+      left: 2px;
+      background: var(--gold);
+      color: black;
+      font-size: 8px;
+      font-weight: bold;
+      padding: 1px 3px;
+      border-radius: 3px;
+      text-transform: uppercase;
+    }
+
+    /* Flex row for price & category */
+    .row {
+      display: flex;
+      gap: 15px;
+    }
+
+    .row .form-group {
+      flex: 1;
+    }
+
+    /* Key storage checkbox */
+    .auth-save {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+
+    .auth-save input {
+      accent-color: var(--gold);
+      width: 16px;
+      height: 16px;
+    }
+
+    /* Primary Submit Button & Control Buttons */
+    .btn-submit {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, #b8860b 0%, var(--gold) 100%);
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .btn-submit:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-hover) 100%);
+    }
+
+    .btn-submit:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    .btn-submit:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      filter: grayscale(1);
+    }
+
+    .btn-cancel {
+      width: 100%;
+      padding: 14px;
+      background-color: #222;
+      color: #fff;
+      border: 1px solid #333;
+      border-radius: 8px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 500;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 10px;
+      display: none;
+      text-align: center;
+    }
+
+    .btn-cancel:hover {
+      background-color: #333;
+      border-color: #444;
+    }
+
+    /* Management Table Row design */
+    .mgmt-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      border-bottom: 1px solid #1c1c1c;
+      padding: 14px 0;
+      transition: background-color 0.2s ease;
+    }
+    
+    .mgmt-row:hover {
+      background-color: rgba(255, 255, 255, 0.02);
+    }
+
+    .btn-action {
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn-action.edit {
+      background-color: var(--gold);
+      color: #000;
+    }
+
+    .btn-action.edit:hover {
+      background-color: var(--gold-hover);
+      transform: scale(1.03);
+    }
+
+    .btn-action.delete {
+      background-color: var(--error);
+      color: #fff;
+    }
+
+    .btn-action.delete:hover {
+      background-color: #e57373;
+      transform: scale(1.03);
+    }
+
+    /* Toast system */
+    #toast-container {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+      width: 90%;
+      max-width: 400px;
+    }
+
+    .toast {
+      background-color: #1e1e1e;
+      border-left: 4px solid var(--gold);
+      padding: 15px 20px;
+      border-radius: 6px;
+      margin-top: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+      animation: slideUp 0.3s ease forwards;
+    }
+
+    .toast.success {
+      border-left-color: var(--success);
+    }
+
+    .toast.error {
+      border-left-color: var(--error);
+    }
+
+    .toast .close-toast {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 1.1rem;
+      padding-left: 10px;
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    /* Spinner animation */
+    .spinner {
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(0,0,0,0.1);
+      border-radius: 50%;
+      border-top-color: #000;
+      animation: spin 1s ease-in-out infinite;
+      display: none;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 480px) {
+      .row {
+        flex-direction: column;
+        gap: 0;
+      }
+      header h1 {
+        font-size: 1.5rem;
+      }
+      .mgmt-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+      .mgmt-row div:last-child {
+        align-self: flex-end;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>MAY-MAY FASHION</h1>
+    <p>CMS Catalog Manager</p>
+  </header>
+
+  <main>
+    <!-- Add / Edit Form Card -->
+    <div class="card">
+      <h2 id="formTitle" style="font-family: 'Cinzel', serif; font-size: 1.3rem; color: var(--gold); letter-spacing: 1px; margin-bottom: 20px;">Publish New Product</h2>
+      
+      <form id="productForm" novalidate>
+        
+        <div class="form-group">
+          <label for="title">Product Title</label>
+          <input type="text" id="title" name="title" placeholder="e.g. Royal Gold Velvet Gown" required>
+        </div>
+
+        <div class="row">
+          <div class="form-group">
+            <label for="price">Price (USD)</label>
+            <input type="number" id="price" name="price" placeholder="e.g. 250.00" step="0.01" min="0" required>
+          </div>
+
+          <div class="form-group">
+            <label for="category">Category</label>
+            <select id="category" name="category">
+              <option value="Dresses">Dresses</option>
+              <option value="Tops">Tops</option>
+              <option value="Bags & Handbags">Bags & Handbags</option>
+              <option value="Shoes">Shoes</option>
+              <option value="Jewelry & Accessories">Jewelry & Accessories</option>
+              <option value="Premium Sets">Premium Sets</option>
+              <option value="General" selected>General</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Editor for kept existing images (Edit Mode only) -->
+        <div class="form-group" id="existing-images-container" style="display: none;"></div>
+
+        <div class="form-group">
+          <label id="uploadImagesLabel">Product Images (Upload 1 to 5 images)</label>
+          <div class="file-upload-wrapper" id="image-dropzone">
+            <span class="upload-icon">📷</span>
+            <span class="upload-text">Drag & drop or <strong>browse images</strong></span>
+            <input type="file" id="images" name="images" accept="image/*" multiple>
+          </div>
+          <div class="preview-container" id="images-preview"></div>
+        </div>
+
+        <!-- Editor for kept existing video (Edit Mode only) -->
+        <div class="form-group" id="existing-video-container" style="display: none; background: var(--input-bg); border: 1px solid var(--input-border); padding: 12px; border-radius: 8px; display: flex; align-items: center; justify-content: space-between;">
+          <span class="video-status-text" style="font-size: 0.9rem; color: var(--text-color);">Current Video Loop Active</span>
+          <button type="button" onclick="removeExistingVideo()" style="background: none; border: 1px solid var(--error); color: var(--error); padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">Remove Video</button>
+        </div>
+
+        <div class="form-group">
+          <label>Promotional Video Loop (Optional - 1 short MP4)</label>
+          <div class="file-upload-wrapper" id="video-dropzone">
+            <span class="upload-icon">🎥</span>
+            <span class="upload-text">Drag & drop or <strong>browse video</strong></span>
+            <input type="file" id="video" name="video" accept="video/mp4,video/*">
+          </div>
+          <div class="preview-container" id="video-preview"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="secretKey">Secret Admin Access Key</label>
+          <input type="password" id="secretKey" placeholder="Enter administrative token" required>
+          <div class="auth-save">
+            <input type="checkbox" id="saveKey" checked>
+            <label for="saveKey" style="display:inline; margin:0; font-weight:normal;">Remember access key on this device</label>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-submit" id="submitBtn">
+          <span class="spinner" id="btnSpinner"></span>
+          <span id="btnText">Publish Product</span>
+        </button>
+
+        <button type="button" class="btn-cancel" id="cancelEditBtn" onclick="cancelEdit()">Cancel Edit</button>
+
+      </form>
+    </div>
+
+    <!-- Management Card Section -->
+    <div class="card" id="management-section">
+      <h2 style="font-family: 'Cinzel', serif; font-size: 1.3rem; color: var(--gold); letter-spacing: 1px; margin-bottom: 20px; border-bottom: 1px solid var(--card-border); padding-bottom: 10px;">
+        Existing Products Management
+      </h2>
+      <div id="management-list">
+        <div style="color:var(--text-muted); font-size:0.9rem; text-align:center; padding:10px;">Enter your Access Key to load existing products.</div>
+      </div>
+    </div>
+  </main>
+
+  <div id="toast-container"></div>
+
+  <script>
+    // System elements
+    const productForm = document.getElementById('productForm');
+    const secretKeyInput = document.getElementById('secretKey');
+    const saveKeyCheckbox = document.getElementById('saveKey');
+    const submitBtn = document.getElementById('submitBtn');
+    const btnSpinner = document.getElementById('btnSpinner');
+    const btnText = document.getElementById('btnText');
+    const toastContainer = document.getElementById('toast-container');
+    const cancelEditBtn = document.getElementById('cancelEditBtn');
+    const formTitle = document.getElementById('formTitle');
+
+    // CRUD State
+    let isEditing = false;
+    let editingProductId = null;
+    let editingKeptImages = [];
+    let removeVideoFlag = false;
+    let allManagementProducts = [];
+
+    // File arrays to maintain state for new uploads
+    let selectedImages = [];
+    let selectedVideo = null;
+
+    // Toast manager
+    function showToast(message, type = 'info') {
+      const toast = document.createElement('div');
+      toast.className = `toast ${type}`;
+      toast.innerHTML = `
+        <span>${message}</span>
+        <button class="close-toast">&times;</button>
+      `;
+      
+      toastContainer.appendChild(toast);
+      
+      toast.querySelector('.close-toast').addEventListener('click', () => {
+        toast.remove();
+      });
+
+      // Auto dismiss
+      setTimeout(() => {
+        toast.remove();
+      }, 5000);
+    }
+
+    // Load secret key & trigger products fetch if key exists
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedKey = localStorage.getItem('may_may_admin_token');
+      if (savedKey) {
+        secretKeyInput.value = savedKey;
+        fetchManagementList();
+      }
+    });
+
+    // Automatically load listing when secret key changes or loses focus
+    secretKeyInput.addEventListener('blur', fetchManagementList);
+    secretKeyInput.addEventListener('input', () => {
+      if (!secretKeyInput.value.trim()) {
+        document.getElementById('management-list').innerHTML = '<div style="color:var(--text-muted); font-size:0.9rem; text-align:center; padding:10px;">Enter your Access Key to load existing products.</div>';
+      }
+    });
+
+    // Fetch Products list for management
+    async function fetchManagementList() {
+      const listContainer = document.getElementById('management-list');
+      const secretKey = secretKeyInput.value.trim();
+      
+      if (!secretKey) {
+        listContainer.innerHTML = '<div style="color:var(--text-muted); font-size:0.9rem; text-align:center; padding:10px;">Enter your Access Key to load existing products.</div>';
+        return;
+      }
+      
+      try {
+        const response = await fetch('/api/products', {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${secretKey}`,
+            'x-admin-key': secretKey
+          }
+        });
+        
+        if (!response.ok) {
+          throw new Error('Verification failed.');
+        }
+        
+        allManagementProducts = await response.json();
+        renderManagementList(allManagementProducts);
+      } catch (err) {
+        console.error(err);
+        listContainer.innerHTML = '<div style="color:var(--error); font-size:0.9rem; text-align:center; padding:10px;">Failed to load products. Check your Access Key or Server.</div>';
+      }
+    }
+
+    // Render management list
+    function renderManagementList(products) {
+      const listContainer = document.getElementById('management-list');
+      listContainer.innerHTML = '';
+      
+      if (products.length === 0) {
+        listContainer.innerHTML = '<div style="color:var(--text-muted); font-size:0.9rem; text-align:center; padding:10px;">No products published yet.</div>';
+        return;
+      }
+      
+      products.forEach(product => {
+        const row = document.createElement('div');
+        row.className = 'mgmt-row';
+        
+        const thumb = product.image_urls && product.image_urls[0] ? product.image_urls[0] : '';
+        const categoryBadge = `<span style="font-size:0.75rem; background:#221f1a; border:1px solid var(--gold); color:var(--gold); padding:2px 6px; border-radius:10px; margin-left:8px;">${product.category}</span>`;
+        
+        row.innerHTML = `
+          <div style="display:flex; align-items:center; gap:12px; flex:1; min-width:0;">
+            <img src="${thumb}" style="width:50px; height:50px; object-fit:cover; border-radius:6px; border:1px solid var(--card-border);" alt="Thumb">
+            <div style="min-width:0; flex:1;">
+              <div style="font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; color:var(--text-color);">${product.title} ${categoryBadge}</div>
+              <div style="color:var(--gold); font-weight:bold; font-size:0.9rem; margin-top:2px;">$${parseFloat(product.price).toFixed(2)}</div>
+            </div>
+          </div>
+          <div style="display:flex; gap:8px;">
+            <button type="button" class="btn-action edit" onclick="startEditProduct('${product.id}', event)">Edit</button>
+            <button type="button" class="btn-action delete" onclick="deleteProduct('${product.id}', event)">Delete</button>
+          </div>
+        `;
+        listContainer.appendChild(row);
+      });
+    }
+
+    // Enter Edit Mode and populate details
+    window.startEditProduct = function(productId, event) {
+      if (event) event.stopPropagation();
+      const product = allManagementProducts.find(p => p.id === productId);
+      if (!product) return;
+      
+      isEditing = true;
+      editingProductId = productId;
+      editingKeptImages = [...(product.image_urls || [])];
+      removeVideoFlag = false;
+      
+      // Populate fields
+      document.getElementById('title').value = product.title;
+      document.getElementById('price').value = product.price;
+      document.getElementById('category').value = product.category;
+      
+      // Update UI headings & buttons
+      formTitle.textContent = `Edit Product: ${product.title}`;
+      btnText.textContent = 'Update Product';
+      cancelEditBtn.style.display = 'block';
+      
+      // Setup existing assets view
+      renderExistingImagesEditor();
+      
+      const existingVideoContainer = document.getElementById('existing-video-container');
+      if (product.video_url) {
+        existingVideoContainer.style.display = 'flex';
+        existingVideoContainer.querySelector('.video-status-text').textContent = 'Current Video Loop Active';
+      } else {
+        existingVideoContainer.style.display = 'none';
+      }
+      
+      // Reset new uploads
+      selectedImages = [];
+      selectedVideo = null;
+      renderImagePreviews();
+      renderVideoPreview();
+      
+      // Scroll to Form Card
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    // Render current pictures inside editor
+    function renderExistingImagesEditor() {
+      const container = document.getElementById('existing-images-container');
+      container.innerHTML = '';
+      
+      if (editingKeptImages.length === 0) {
+        container.style.display = 'none';
+        return;
+      }
+      
+      container.style.display = 'block';
+      const label = document.createElement('label');
+      label.textContent = 'Current Photos (click × to delete from product):';
+      container.appendChild(label);
+      
+      const wrapper = document.createElement('div');
+      wrapper.className = 'preview-container';
+      
+      editingKeptImages.forEach((url, index) => {
+        const item = document.createElement('div');
+        item.className = 'preview-item';
+        item.innerHTML = `
+          <img src="${url}" alt="Existing">
+          <button type="button" class="remove-btn" onclick="removeExistingImage(${index})">&times;</button>
+        `;
+        wrapper.appendChild(item);
+      });
+      
+      container.appendChild(wrapper);
+      
+      // Update instruction label dynamically
+      document.getElementById('uploadImagesLabel').textContent = `Add More Images (Up to ${5 - editingKeptImages.length} additional)`;
+    }
+
+    window.removeExistingImage = function(index) {
+      editingKeptImages.splice(index, 1);
+      renderExistingImagesEditor();
+    };
+
+    window.removeExistingVideo = function() {
+      removeVideoFlag = true;
+      document.getElementById('existing-video-container').style.display = 'none';
+      showToast('Video flagged for removal.', 'info');
+    };
+
+    // Revert form state back to Publishing mode
+    window.cancelEdit = function() {
+      isEditing = false;
+      editingProductId = null;
+      editingKeptImages = [];
+      removeVideoFlag = false;
+      
+      productForm.reset();
+      formTitle.textContent = 'Publish New Product';
+      btnText.textContent = 'Publish Product';
+      cancelEditBtn.style.display = 'none';
+      document.getElementById('existing-images-container').style.display = 'none';
+      document.getElementById('existing-video-container').style.display = 'none';
+      document.getElementById('uploadImagesLabel').textContent = 'Product Images (Upload 1 to 5 images)';
+      
+      selectedImages = [];
+      selectedVideo = null;
+      renderImagePreviews();
+      renderVideoPreview();
+    };
+
+    // Delete record trigger
+    window.deleteProduct = async function(productId, event) {
+      if (event) event.stopPropagation();
+      const product = allManagementProducts.find(p => p.id === productId);
+      if (!product) return;
+      
+      const confirmed = confirm(`Are you sure you want to permanently delete "${product.title}"? This will remove the listing from Supabase and delete all assets from Cloudinary.`);
+      if (!confirmed) return;
+      
+      const secretKey = secretKeyInput.value.trim();
+      
+      try {
+        const response = await fetch(`/api/products/${productId}`, {
+          method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${secretKey}`,
+            'x-admin-key': secretKey
+          }
+        });
+        
+        const result = await response.json();
+        
+        if (response.ok && result.success) {
+          showToast('Product successfully deleted.', 'success');
+          if (isEditing && editingProductId === productId) {
+            cancelEdit();
+          }
+          await fetchManagementList();
+        } else {
+          showToast(result.message || 'Failed to delete product.', 'error');
+        }
+      } catch (err) {
+        console.error(err);
+        showToast('Connection error. Failed to delete product.', 'error');
+      }
+    };
+
+    // File selection listeners for new files
+    const imageInput = document.getElementById('images');
+    const imagePreviewContainer = document.getElementById('images-preview');
+    const videoInput = document.getElementById('video');
+    const videoPreviewContainer = document.getElementById('video-preview');
+
+    imageInput.addEventListener('change', (e) => {
+      const files = Array.from(e.target.files);
+      const limit = isEditing ? (5 - editingKeptImages.length) : 5;
+      
+      if (selectedImages.length + files.length > limit) {
+        showToast(`You can only upload up to ${limit} images in total.`, 'error');
+        imageInput.value = '';
+        return;
+      }
+
+      files.forEach(file => {
+        if (!file.type.startsWith('image/')) {
+          showToast(`File "${file.name}" is not an image.`, 'error');
+          return;
+        }
+        selectedImages.push(file);
+      });
+
+      renderImagePreviews();
+      imageInput.value = '';
+    });
+
+    function renderImagePreviews() {
+      imagePreviewContainer.innerHTML = '';
+      selectedImages.forEach((file, index) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const item = document.createElement('div');
+          item.className = 'preview-item';
+          item.innerHTML = `
+            <img src="${e.target.result}" alt="Preview">
+            <button type="button" class="remove-btn" onclick="removeImage(${index})">&times;</button>
+          `;
+          imagePreviewContainer.appendChild(item);
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    window.removeImage = function(index) {
+      selectedImages.splice(index, 1);
+      renderImagePreviews();
+    };
+
+    videoInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      if (!file.type.startsWith('video/')) {
+        showToast('Please select a valid video file.', 'error');
+        videoInput.value = '';
+        return;
+      }
+
+      if (file.size > 50 * 1024 * 1024) {
+        showToast('Video size exceeds 50MB limit.', 'error');
+        videoInput.value = '';
+        return;
+      }
+
+      selectedVideo = file;
+      renderVideoPreview();
+      videoInput.value = '';
+    });
+
+    function renderVideoPreview() {
+      videoPreviewContainer.innerHTML = '';
+      if (!selectedVideo) return;
+
+      const item = document.createElement('div');
+      item.className = 'preview-item';
+      item.innerHTML = `
+        <video src="${URL.createObjectURL(selectedVideo)}" muted loop></video>
+        <span class="video-badge">Video</span>
+        <button type="button" class="remove-btn" onclick="removeVideo()">&times;</button>
+      `;
+      videoPreviewContainer.appendChild(item);
+    }
+
+    window.removeVideo = function() {
+      selectedVideo = null;
+      renderVideoPreview();
+    };
+
+    // Drag & Drop
+    ['image-dropzone', 'video-dropzone'].forEach(id => {
+      const element = document.getElementById(id);
+      element.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        element.classList.add('dragover');
+      });
+      element.addEventListener('dragleave', () => {
+        element.classList.remove('dragover');
+      });
+      element.addEventListener('drop', (e) => {
+        e.preventDefault();
+        element.classList.remove('dragover');
+      });
+    });
+
+    // Form Submission for Publish & Update
+    productForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const title = document.getElementById('title').value.trim();
+      const price = document.getElementById('price').value.trim();
+      const category = document.getElementById('category').value;
+      const secretKey = secretKeyInput.value.trim();
+
+      if (!title || !price || !secretKey) {
+        showToast('Please fill out all required fields and the Access Key.', 'error');
+        return;
+      }
+
+      const totalImagesCount = selectedImages.length + (isEditing ? editingKeptImages.length : 0);
+      if (totalImagesCount === 0) {
+        showToast('At least one product image is required.', 'error');
+        return;
+      }
+
+      if (saveKeyCheckbox.checked) {
+        localStorage.setItem('may_may_admin_token', secretKey);
+      } else {
+        localStorage.removeItem('may_may_admin_token');
+      }
+
+      // Build Multipart request body
+      const formData = new FormData();
+      formData.append('title', title);
+      formData.append('price', price);
+      formData.append('category', category);
+
+      if (isEditing) {
+        formData.append('existing_image_urls', JSON.stringify(editingKeptImages));
+        formData.append('remove_video', removeVideoFlag ? 'true' : 'false');
+      }
+
+      selectedImages.forEach(file => {
+        formData.append('images', file);
+      });
+
+      if (selectedVideo) {
+        formData.append('video', selectedVideo);
+      }
+
+      submitBtn.disabled = true;
+      btnSpinner.style.display = 'inline-block';
+      btnText.textContent = isEditing ? 'Updating product details...' : 'Uploading to Cloudinary & Supabase...';
+
+      const url = isEditing ? `/api/products/${editingProductId}` : '/api/products/create';
+      const method = isEditing ? 'PUT' : 'POST';
+
+      try {
+        const response = await fetch(url, {
+          method: method,
+          headers: {
+            'Authorization': `Bearer ${secretKey}`,
+            'x-admin-key': secretKey
+          },
+          body: formData
+        });
+
+        const result = await response.json();
+
+        if (response.ok && result.success) {
+          showToast(isEditing ? 'Product successfully updated!' : 'Product successfully published!', 'success');
+          
+          if (isEditing) {
+            cancelEdit();
+          } else {
+            productForm.reset();
+            selectedImages = [];
+            selectedVideo = null;
+            renderImagePreviews();
+            renderVideoPreview();
+          }
+          await fetchManagementList();
+        } else {
+          showToast(result.message || 'Upload failed. Please check credentials.', 'error');
+        }
+      } catch (err) {
+        console.error('Error during submission:', err);
+        showToast('Connection error. Server may be down or unreachable.', 'error');
+      } finally {
+        submitBtn.disabled = false;
+        btnSpinner.style.display = 'none';
+        btnText.textContent = isEditing ? 'Update Product' : 'Publish Product';
+      }
+    });
+
+  </script>
+</body>
+</html>

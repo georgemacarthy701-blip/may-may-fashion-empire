@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>About Us | May-May Fashion Empire</title>
+  <meta name="description" content="Discover the history, tailoring heritage, and core luxury fashion values of May-May Fashion Empire. Crafting elegance and celebrating royalty.">
+  
+  <!-- Premium Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-color: #050505;
+      --card-bg: #0d0d0d;
+      --card-border: rgba(212, 175, 55, 0.15);
+      --gold: #d4af37;
+      --gold-glow: rgba(212, 175, 55, 0.35);
+      --gold-dark: #aa841c;
+      --text-color: #f5f5f5;
+      --text-muted: #a0a0a0;
+      --font-luxury: 'Cinzel', serif;
+      --font-body: 'Outfit', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* Decorative Background Gradients */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -10%;
+      left: -10%;
+      width: 50%;
+      height: 50%;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      bottom: -10%;
+      right: -10%;
+      width: 50%;
+      height: 50%;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Luxury Header */
+    header {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 50px 20px 20px 20px;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+      background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, transparent 100%);
+    }
+
+    .logo-container h1 {
+      font-family: var(--font-luxury);
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--gold);
+      letter-spacing: 4px;
+      margin-bottom: 8px;
+      text-shadow: 0 0 15px var(--gold-glow);
+    }
+
+    .logo-container p {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      color: var(--text-muted);
+      font-weight: 300;
+    }
+
+    /* Header Navigation */
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 22px;
+    }
+
+    nav a {
+      color: var(--text-color);
+      text-decoration: none;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: var(--gold);
+    }
+
+    nav a.active {
+      color: var(--gold);
+      border-bottom: 1px solid var(--gold);
+      padding-bottom: 2px;
+      text-shadow: 0 0 8px var(--gold-glow);
+    }
+
+    /* Main Content */
+    main {
+      position: relative;
+      z-index: 10;
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 50px 20px 80px 20px;
+      flex-grow: 1;
+    }
+
+    /* Hero Heading */
+    .about-hero {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .about-hero h2 {
+      font-family: var(--font-luxury);
+      font-size: 2.2rem;
+      color: var(--gold);
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+
+    .about-hero p {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      font-weight: 300;
+      letter-spacing: 1px;
+    }
+
+    /* Brand Story Split Layout */
+    .story-section {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 50px;
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 50px;
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4);
+      margin-bottom: 60px;
+      align-items: center;
+    }
+
+    .story-image {
+      width: 100%;
+      height: 420px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1px solid var(--card-border);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+    }
+
+    .story-content h3 {
+      font-family: var(--font-luxury);
+      font-size: 1.6rem;
+      color: var(--gold);
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+    }
+
+    .story-content p {
+      color: var(--text-muted);
+      line-height: 1.8;
+      font-size: 0.98rem;
+      margin-bottom: 20px;
+    }
+
+    .story-content p strong {
+      color: var(--text-color);
+    }
+
+    /* Values Section */
+    .values-title {
+      text-align: center;
+      font-family: var(--font-luxury);
+      font-size: 1.8rem;
+      color: var(--gold);
+      letter-spacing: 2px;
+      margin-bottom: 40px;
+      text-transform: uppercase;
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-bottom: 70px;
+    }
+
+    .value-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 30px 25px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .value-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--gold);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5), 0 0 12px rgba(212, 175, 55, 0.1);
+    }
+
+    .value-icon {
+      font-size: 2.2rem;
+      color: var(--gold);
+      margin-bottom: 18px;
+      display: inline-block;
+    }
+
+    .value-card h4 {
+      font-family: var(--font-luxury);
+      font-size: 1.2rem;
+      color: var(--text-color);
+      margin-bottom: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    .value-card p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    /* CTA Section */
+    .cta-container {
+      text-align: center;
+      padding: 40px 20px;
+      background: linear-gradient(135deg, rgba(20,20,20,0.8) 0%, rgba(13,13,13,0.8) 100%);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    }
+
+    .cta-container h3 {
+      font-family: var(--font-luxury);
+      font-size: 1.5rem;
+      color: var(--gold);
+      margin-bottom: 15px;
+      letter-spacing: 1px;
+    }
+
+    .cta-container p {
+      color: var(--text-muted);
+      margin-bottom: 25px;
+      font-size: 0.95rem;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 30px;
+      background: linear-gradient(135deg, #b8860b 0%, var(--gold) 100%);
+      color: #000;
+      text-decoration: none;
+      border-radius: 30px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px var(--gold-glow);
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-hover) 100%);
+    }
+
+    /* Footer */
+    footer {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 50px 20px;
+      border-top: 1px solid rgba(212, 175, 55, 0.1);
+      margin-top: auto;
+      background-color: #030303;
+    }
+
+    footer p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    footer .gold-text {
+      color: var(--gold);
+      font-family: var(--font-luxury);
+      font-weight: 600;
+    }
+
+    footer .contact-info {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 12px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 900px) {
+      .story-section {
+        grid-template-columns: 1fr;
+        padding: 30px;
+        gap: 30px;
+      }
+      .story-image {
+        height: 300px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .logo-container h1 {
+        font-size: 1.9rem;
+        letter-spacing: 2px;
+      }
+      .logo-container p {
+        font-size: 0.75rem;
+        letter-spacing: 2px;
+      }
+      .about-hero h2 {
+        font-size: 1.7rem;
+      }
+      .about-hero p {
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo-container">
+      <h1>MAY-MAY FASHION</h1>
+      <p>Elevate Your Style</p>
+    </div>
+    <nav>
+      <a href="index.html">CATALOG</a>
+      <a href="about.html" class="active">ABOUT US</a>
+    </nav>
+  </header>
+
+  <main>
+    
+    <!-- Hero Header -->
+    <div class="about-hero">
+      <h2>ABOUT MAY-MAY FASHION EMPIRE</h2>
+      <p>Crafting Elegance, Celebrating Royalty</p>
+    </div>
+
+    <!-- Detailed Brand Story Layout -->
+    <section class="story-section">
+      <div>
+        <img class="story-image" src="/about_hero.jpg" alt="Luxury Tailoring Atelier">
+      </div>
+      <div class="story-content">
+        <h3>Our Heritage & Vision</h3>
+        <p>At <strong>May-May Fashion Empire</strong>, fashion is more than apparel—it is a statement of royalty, confidence, and individuality. We specialize in bringing you top-tier, luxury fashion trends from around the globe, offering both retail and wholesale options for fashion enthusiasts and boutique owners.</p>
+        <p>Our boutique catalog features a complete array of premium fashion essentials—from showstopping dresses and stylish tops to high-end footwear, designer handbags, statement accessories, and matching sets. Every item in our collection is meticulously hand-picked and sourced for quality, elegance, and durability.</p>
+        <p>Through our seamless WhatsApp ordering system, we offer a personal, hassle-free shopping experience. Our sales team connects directly with you to answer inquiries on sizing, wholesale pricing, bulk packaging, and immediate item availability, ensuring that every product you order fits your style and needs perfectly.</p>
+      </div>
+    </section>
+
+    <!-- Core Values Section -->
+    <h3 class="values-title">Our Core Foundations</h3>
+    <section class="values-grid">
+      
+      <div class="value-card">
+        <div class="value-icon">✨</div>
+        <h4>Exclusive Designs</h4>
+        <p>Unique, limited-edition collections crafted for special occasions, formal events, and upscale galas.</p>
+      </div>
+
+      <div class="value-card">
+        <div class="value-icon">📐</div>
+        <h4>Custom Fitting</h4>
+        <p>Bespoke tailoring engineered from your specific measurements to deliver a perfect, personalized silhouette.</p>
+      </div>
+
+      <div class="value-card">
+        <div class="value-icon">💎</div>
+        <h4>Premium Materials</h4>
+        <p>We source authentic textiles, luxury silks, and durable fabrics to guarantee lasting quality and premium wear.</p>
+      </div>
+
+      <div class="value-card">
+        <div class="value-icon">💬</div>
+        <h4>Seamless Ordering</h4>
+        <p>Direct communication and support via WhatsApp, creating a personalized designer-to-client booking experience.</p>
+      </div>
+
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-container">
+      <h3>Experience Our Creations</h3>
+      <p>Browse our active collections and begin your custom tailored fashion booking today.</p>
+      <a href="index.html" class="cta-btn">Explore Our Catalog</a>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; <span id="year">2026</span> <span class="gold-text">MAY-MAY FASHION EMPIRE</span>. All Rights Reserved.</p>
+    <p class="contact-info">Bespoke Couture & Custom Tailoring Atelier | WhatsApp Support Enabled</p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
