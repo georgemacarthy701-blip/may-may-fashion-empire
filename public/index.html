@@ -876,7 +876,7 @@
         let videoToggleBtnHTML = '';
         if (hasVideo) {
           videoHTML = `
-            <video class="product-media video-player" src="${product.video_url}" loop muted playsinline style="display: none; z-index: 2; opacity: 0;"></video>
+            <video class="product-media video-player" src="${product.video_url}" loop controls playsinline style="display: none; z-index: 2; opacity: 0;"></video>
           `;
           videoToggleBtnHTML = `
             <button class="video-toggle-btn" onclick="toggleVideo('${product.id}', event)">
@@ -1043,7 +1043,12 @@
         videoEl.style.display = 'block';
         videoEl.style.opacity = 1;
         videoEl.style.zIndex = 2;
-        videoEl.play();
+        videoEl.muted = false; // Enable audio
+        videoEl.play().catch(err => {
+          console.warn("Unmuted autoplay blocked, falling back to muted playback.", err);
+          videoEl.muted = true;
+          videoEl.play();
+        });
         if (toggleBtn) {
           toggleBtn.querySelector('span').textContent = '📷 View Photos';
           toggleBtn.classList.add('active');
