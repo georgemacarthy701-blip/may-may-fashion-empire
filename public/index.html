@@ -890,7 +890,7 @@
         // Pre-filled WhatsApp Text URL Builder
         // Encodes values to form: Hi May-May Fashion Empire! I am interested in purchasing "TITLE" priced at $PRICE. Link: PRODUCT_URL
         const productUrl = `${window.location.origin}${window.location.pathname}#product-${product.id}`;
-        const whatsappText = `Hi May-May Fashion Empire! I am interested in purchasing "${product.title}" priced at $${parseFloat(product.price).toFixed(2)}. Link: ${productUrl}`;
+        const whatsappText = `Hi May-May Fashion Empire! I am interested in purchasing "${product.title}" priced at Le ${parseFloat(product.price).toFixed(2)}. Link: ${productUrl}`;
         const whatsappHref = `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(whatsappText)}`;
 
         card.innerHTML = `
@@ -901,7 +901,7 @@
           <div class="product-details">
             <div class="product-info">
               <h3 class="product-title" title="${product.title}">${product.title}</h3>
-              <div class="product-price">$${parseFloat(product.price).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
+              <div class="product-price">Le ${parseFloat(product.price).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
             </div>
             <a href="${whatsappHref}" target="_blank" class="whatsapp-btn" rel="noopener noreferrer">
               <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

@@ -442,7 +442,7 @@
 <body>
 
   <header>
-    <h1>MAY-MAY FASHION</h1>
+    <h1>MAY-MAY FASHION EMPIRE</h1>
     <p>CMS Catalog Manager</p>
   </header>
 
@@ -460,8 +460,8 @@
 
         <div class="row">
           <div class="form-group">
-            <label for="price">Price (USD)</label>
-            <input type="number" id="price" name="price" placeholder="e.g. 250.00" step="0.01" min="0" required>
+            <label for="price">Price (Le)</label>
+            <input type="number" id="price" name="price" placeholder="e.g. 250000" step="0.01" min="0" required>
           </div>
 
           <div class="form-group">
@@ -653,7 +653,7 @@
             <img src="${thumb}" style="width:50px; height:50px; object-fit:cover; border-radius:6px; border:1px solid var(--card-border);" alt="Thumb">
             <div style="min-width:0; flex:1;">
               <div style="font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; color:var(--text-color);">${product.title} ${categoryBadge}</div>
-              <div style="color:var(--gold); font-weight:bold; font-size:0.9rem; margin-top:2px;">$${parseFloat(product.price).toFixed(2)}</div>
+              <div style="color:var(--gold); font-weight:bold; font-size:0.9rem; margin-top:2px;">Le ${parseFloat(product.price).toFixed(2)}</div>
             </div>
           </div>
           <div style="display:flex; gap:8px;">
