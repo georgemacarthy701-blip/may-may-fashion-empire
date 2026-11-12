@@ -9,23 +9,22 @@ const { createClient } = require('@supabase/supabase-js');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Enable CORS and parsing of JSON/URL-encoded bodies
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-// Serve static files from the public directory
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Initialize Supabase Client
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-if (!supabaseUrl || !supabaseServiceRoleKey) {
-  console.error('CRITICAL: Supabase environment variables are missing.');
-}
-const supabase = createClient(supabaseUrl, supabaseServiceRoleKey);
 
-// Initialize Cloudinary Configuration
+if (!supabaseUrl || !supabaseServiceRoleKey) {
+  console.warn('Warning: Supabase environment variables are missing. The app will still serve the storefront, but product APIs will fail until they are provided.');
+}
+
+const supabase = supabaseUrl && supabaseServiceRoleKey
+  ? createClient(supabaseUrl, supabaseServiceRoleKey)
+  : null;
+
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
